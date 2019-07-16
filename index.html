@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock Paper Scissors</title>
+</head>
+<body>
+  <script>
+    function computerPlay() {
+      let choices = ["Rock", "Paper", "Scissors"];
+      return choices[Math.floor(Math.random() * choices.length)];
+    }
+
+    function playRound(playerSelection, computerSelection = computerPlay()) {
+      playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
+
+      let win = playerSelection + " beats " + computerSelection + "! You get a point!";
+      let lose = computerSelection + " beats " + playerSelection + "! Computer gets a point!";
+
+      if (playerSelection == computerSelection) {
+        console.log("You tie!");
+        return "tie";
+      }
+      else if (computerSelection == "Rock") {
+        if (playerSelection == "Paper") {
+          console.log(win);
+          return "win";
+        }
+        else {
+          console.log(lose);
+          return "lose";
+        }
+      }
+      else if (computerSelection == "Paper") {
+        if (playerSelection == "Scissors") {
+          console.log(win);
+          return "win";
+        }
+        else {
+          console.log(lose);
+          return "lose";
+        }
+      }
+      else if (computerSelection == "Scissors") {
+        if (playerSelection == "Rock") {
+          console.log(win);
+          return "win";
+        }
+        else {
+          console.log(lose);
+          return "lose";
+        }
+      }
+    }
+
+    function game() {
+
+      let playerScore = 0;
+      let computerScore = 0;
+
+      while (playerScore + computerScore < 5) {
+        let playerChoice = prompt("Do you choose Rock, Paper, or Scissors?");
+        let result = playRound(playerChoice);
+
+        if (result == "win") {
+          playerScore++;
+        }
+        else if (result == "lose") {
+          computerScore++;
+        }
+        console.log("Your score: " + playerScore + "\n" + "Computer score: " + computerScore);
+      }
+      
+      return (playerScore > computerScore) ? "You win with " + playerScore + " points!" : "Computer wins with " + computerScore + " points!";
+    }
+  </script>
+</body>
+</html>
