@@ -2,66 +2,70 @@ let playerScore = 0;
 let computerScore = 0;
 const WINNING_SCORE = 5;
 
-const playerChoicehtml = document.querySelector("#player-choice");
-const computerChoicehtml = document.querySelector("#computer-choice");
+const choices = document.querySelector("#choices");
+const scores = document.querySelector("#scores");
+const results = document.querySelector("#results");
 
-const playerScorehtml = document.querySelector("#player-score");
-const computerScorehtml = document.querySelector("#computer-score");
+const buttons = document.querySelectorAll("button");
+buttons.forEach(button=>button.addEventListener("click", e=>playRound(e.target.id)));
 
-const gameWinner = document.querySelector("#game-winner");
-const scoreWinner = document.querySelector("#score-winner");
-
+// Generate computer's random choice.
 function computerPlay() {
-    let choices = ["Rock", "Paper", "Scissors"];
-    return choices[Math.floor(Math.random() * choices.length)];
+    let computerChoices = ["Rock", "Paper", "Scissors"];
+    return computerChoices[Math.floor(Math.random() * computerChoices.length)];
 }
 
+// Play a round of rock, paper, scissors.
 function playRound(playerSelection, computerSelection = computerPlay()) {
-    playerChoicehtml.textContent = "You chose: " + playerSelection;
-    computerChoicehtml.textContent = "Computer chose: " + computerSelection;
-
+    let choiceStrings = `You chose: ${playerSelection} <br> Computer chose: ${computerSelection}<br>`
     let win = playerSelection + " beats " + computerSelection + "! You get a point!";
     let lose = computerSelection + " beats " + playerSelection + "! Computer gets a point!";
 
     if (playerSelection == computerSelection) {
-    console.log("You tie!");
-    gameWinner.textContent = "You tie!";
-    return "tie";
+        choices.innerHTML = choiceStrings + "You tie!"
     }
     else if (computerSelection == "Rock" && playerSelection == "Paper" ||
     computerSelection == "Paper" && playerSelection == "Scissors" ||
     computerSelection == "Scissors" && playerSelection == "Rock") {
-        console.log(win);
-        gameWinner.textContent = win;
-        return "win";
+        choices.innerHTML = choiceStrings + win;
+        playerScore++;
     }
     else {
-        console.log(lose);
-        gameWinner.textContent = lose;
-        return "lose";
+        choices.innerHTML = choiceStrings + lose;
+        computerScore++;
     }
-}
-
-function game(playerChoice) {
+    scores.innerHTML = `Your score: ${playerScore} <br> Computer score: ${computerScore}`;
     if (playerScore == WINNING_SCORE) {
-        scoreWinner.textContent = "You win!"
+        endGame("win")
     }
     else if (computerScore == WINNING_SCORE) {
-        scoreWinner.textContent = "You lose!"
-    }
-    
-    let result = playRound(playerChoice);
-    if (result == "win") {
-    playerScore++;
-    playerScorehtml.textContent = "Your score: " + playerScore;
-    return;
-    }
-    else if (result == "lose") {
-    computerScore++;
-    computerScorehtml.textContent = "Computer score: " + computerScore; 
-    return;
+        endGame("lose")
     }
 }
 
-let buttons = document.querySelectorAll("button");
-buttons.forEach(button=>button.addEventListener("click", e=>game(e.target.id)));
+// Check if the game has ended and asks if player wants to play again.
+function endGame(winner) {
+    if (winner == "win") {
+        results.innerHTML = "You win!<br>"
+    }
+    else if (winner == "lose") {
+        results.innerHTML = "You lose!<br>"
+    }
+
+    buttons.forEach(button=>button.disabled = true);
+    
+    let resetBtn = document.createElement("button");
+    resetBtn.textContent = "Play again";
+    resetBtn.addEventListener("click", reset);
+    document.querySelector("#results").appendChild(resetBtn);
+}
+
+// Reset variables and divs.
+function reset() {
+    playerScore = 0;
+    computerScore = 0;
+    buttons.forEach(button=>button.disabled = false);
+    choices.textContent = "";
+    scores.textContent = "";
+    results.textContent = "";
+}
