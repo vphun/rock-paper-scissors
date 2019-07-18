@@ -17,7 +17,7 @@ function computerPlay() {
 
 // Play a round of rock, paper, scissors.
 function playRound(playerSelection, computerSelection = computerPlay()) {
-    let choiceStrings = `You chose: ${playerSelection} <br> Computer chose: ${computerSelection}<br>`
+    let choiceStrings = `You chose: <b>${playerSelection}</b> <br> Computer chose: <b>${computerSelection}</b><br>`
     let win = playerSelection + " beats " + computerSelection + "! You get a point!";
     let lose = computerSelection + " beats " + playerSelection + "! Computer gets a point!";
 
@@ -34,7 +34,7 @@ function playRound(playerSelection, computerSelection = computerPlay()) {
         choices.innerHTML = choiceStrings + lose;
         computerScore++;
     }
-    scores.innerHTML = `Your score: ${playerScore} <br> Computer score: ${computerScore}`;
+    scores.innerHTML = `Your score: <b>${playerScore}</b> <br> Computer score: <b>${computerScore}</b>`;
     if (playerScore == WINNING_SCORE) {
         endGame("win")
     }
