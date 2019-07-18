@@ -1,0 +1,22 @@
+body {
+    text-align: center;
+    font-family: Arial;
+    background-color: seashell;
+}
+
+.game {
+    background-color: gray;
+    max-width: 500px;
+    max-height: 500px;
+    margin: 20vh auto 0 auto;
+    padding: 30px 0;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+button {
+    background-color: cadetblue;
+    border: 1px solid cadetblue;
+    padding: 20px 40px;
+    margin: 10px 0;
+}
