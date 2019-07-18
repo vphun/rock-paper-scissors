@@ -1,77 +1,36 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
 <body>
-  <script>
-    function computerPlay() {
-      let choices = ["Rock", "Paper", "Scissors"];
-      return choices[Math.floor(Math.random() * choices.length)];
-    }
+  <div class="game">
+    <h1>Rock Paper Scissors</h1>
 
-    function playRound(playerSelection, computerSelection = computerPlay()) {
-      playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
+    <p>Choose your move:</p>
 
-      let win = playerSelection + " beats " + computerSelection + "! You get a point!";
-      let lose = computerSelection + " beats " + playerSelection + "! Computer gets a point!";
+    <div class="moves">
+      <button id="Rock" class="move">Rock</button>
+      <button id="Paper" class="move">Paper</button>
+      <button id="Scissors" class="move">Scissors</button>
+    </div>
 
-      if (playerSelection == computerSelection) {
-        console.log("You tie!");
-        return "tie";
-      }
-      else if (computerSelection == "Rock") {
-        if (playerSelection == "Paper") {
-          console.log(win);
-          return "win";
-        }
-        else {
-          console.log(lose);
-          return "lose";
-        }
-      }
-      else if (computerSelection == "Paper") {
-        if (playerSelection == "Scissors") {
-          console.log(win);
-          return "win";
-        }
-        else {
-          console.log(lose);
-          return "lose";
-        }
-      }
-      else if (computerSelection == "Scissors") {
-        if (playerSelection == "Rock") {
-          console.log(win);
-          return "win";
-        }
-        else {
-          console.log(lose);
-          return "lose";
-        }
-      }
-    }
+    <div class="choices">
+      <div id="player-choice">You chose: </div>
+      <div id="computer-choice">Computer chose: </div>
+      <div id="game-winner"></div>
+    </div>
+    <br>
 
-    function game() {
-
-      let playerScore = 0;
-      let computerScore = 0;
-
-      while (playerScore + computerScore < 5) {
-        let playerChoice = prompt("Do you choose Rock, Paper, or Scissors?");
-        let result = playRound(playerChoice);
-
-        if (result == "win") {
-          playerScore++;
-        }
-        else if (result == "lose") {
-          computerScore++;
-        }
-        console.log("Your score: " + playerScore + "\n" + "Computer score: " + computerScore);
-      }
-      
-      return (playerScore > computerScore) ? "You win with " + playerScore + " points!" : "Computer wins with " + computerScore + " points!";
-    }
-  </script>
+    <div class="scores">
+      <div id="player-score">Your score: 0</div>
+      <div id="computer-score">Computer score: 0</div>
+      <div id="score-winner"></div>
+    </div>
+  </div>
+  <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
