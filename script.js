@@ -65,7 +65,7 @@ function reset() {
     playerScore = 0;
     computerScore = 0;
     buttons.forEach(button=>button.disabled = false);
-    choices.textContent = "";
+    choices.textContent = "First to 5 wins!";
     scores.textContent = "";
     results.textContent = "";
 }
